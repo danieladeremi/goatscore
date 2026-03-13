@@ -16,6 +16,18 @@ import traceback
 from pathlib import Path
 import tokenize
 
+def _configure_stdio_utf8() -> None:
+    # Several upstream scripts print Unicode glyphs (e.g., checkmarks).
+    # Force UTF-8 on Windows terminals to avoid cp1252 encode crashes.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+    try:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 
 DEFAULT_STEP_ORDER = [
     # Data build + validation
@@ -128,6 +140,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    _configure_stdio_utf8()
     args = parse_args()
     script_dir = Path(__file__).resolve().parent
 
@@ -148,4 +161,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
