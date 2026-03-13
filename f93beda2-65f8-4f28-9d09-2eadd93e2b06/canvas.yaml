@@ -1,0 +1,470 @@
+id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+name: NBA All-Time Greatness Predictor
+project_id: 7b35fa05-4b60-463b-8173-8d58fa39e15c
+global_imports: []
+python_global_imports: ''
+r_global_imports: ''
+requirements: []
+linux_packages: []
+environment_variables: []
+is_public: false
+organization_id: 1dd903c4-7c45-47d5-88a2-a60f80db23e3
+layers:
+- blocks:
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 2073f9ea-25da-48ed-bcb3-3bf5be63747e
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_engine_v4_top25
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 24000
+    y: 7000
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 2399c882-babb-489e-a6f6-9cc695d9f20a
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_engine_v2
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 18000
+    y: 4200
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 35473995-ba09-48c7-9360-dd206e34d6ab
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: corrected_goat_visualizations
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 22000
+    y: 4200
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: "Creates 4 publication-ready charts visualizing NBA era adjustments:\
+      \ decade pace/efficiency factors, raw vs adjusted PPG for hall-of-fame players,\
+      \ league pace timeline 1946\u20132024, and eFG%/3-point rate evolution"
+    height: 1000
+    id: 3fd701be-e065-48c6-88c1-b9e0249fd240
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: era_adjustment_visualization
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 12000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Scrapes Basketball-Reference career stats, advanced metrics, and
+      season-by-season data for 100+ players
+    height: 1000
+    id: 3ff13051-dae0-4cad-a898-818e53f31f3a
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: scrape_career_stats
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 2000
+    y: 0
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: 'Merges career stats with honors data, calculates per-game metrics,
+      and creates two datasets: career summary table and per-season longitudinal table
+      for age curve analysis'
+    height: 1000
+    id: 59771274-d4a6-4a41-9768-bc836954c280
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: clean_merge_dataset
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 6000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 5efe195d-1e79-45da-8000-9e86ba097e5a
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: age_curve_trajectory_data
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 20000
+    y: 5600
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 6ffdccca-61e5-4879-bf6b-a8e4588bae6d
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_engine_v4
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 22000
+    y: 7000
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Validates NBA dataset integrity, verifies 5 active benchmarks, imputes
+      missing BPM/VORP for pre-era players, and exports career/season data to CSV
+    height: 1000
+    id: 73cd116f-992e-4e29-9269-798b173f82d7
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: validate_and_save
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 8000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Creates 5 interactive visualizations of NBA career projections for
+      5 active stars across optimistic/base/pessimistic scenarios with injury discounts
+      and historical GOAT comparisons
+    height: 1000
+    id: 89d7cc28-bc0d-4d4e-8948-3edde31a99b2
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: projection_visualizations
+    parent_id: null
+    properties: {}
+    status: 4
+    type: 1
+    variables: null
+    width: 1600
+    x: 18000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: ''
+    height: 1000
+    id: 8cc27baf-399d-40f5-9960-cca37ad94fd0
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_score_engine_v3
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 20000
+    y: 7000
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Builds honors dataset from curated MVP, DPOY, Finals MVP, All-NBA,
+      championship, and All-Star data for 100+ players with composite ranking index
+    height: 1000
+    id: 9abc330f-d594-41ee-8832-894d25528f34
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: scrape_honors_data
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 2000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: 'Renders 6 interactive GOAT Score visualization charts: top-25 leaderboard,
+      active stars current vs projected scores, four-pillar radar breakdowns, comparable
+      player similarity analysis, and weight sensitivity rankings across different
+      pillar configurations.'
+    height: 1000
+    id: a243b73d-82da-4b3a-a6e6-9df360289369
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_score_visualizations
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 20000
+    y: 2800
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Projects career trajectories for 5 active NBA stars through retirement
+      using age-gated curves with 3 decline scenarios (pessimistic/base/optimistic)
+      that estimate PPG, PER, BPM, VORP, and career totals while accounting for late-career
+      damping and injury risk
+    height: 1000
+    id: a58538de-e120-4e3f-b2d4-71fd53f7e75d
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: career_projection_engine
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 16000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Computes composite GOAT scores for NBA players using four weighted
+      pillars (volume/longevity, peak dominance, context-adjusted value, honors) with
+      current/projected rankings and comparable player matching
+    height: 1000
+    id: be519172-4564-4a88-a222-0cc3358b7343
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_score_engine
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 18000
+    y: 2800
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Normalizes NBA player stats across 1946-present to modern era baseline
+      using pace, efficiency, and scoring adjustments
+    height: 1000
+    id: bf0c6dab-8859-47b6-a8f5-8c3e343accdb
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: era_adjustment_engine
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 10000
+    y: 1400
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Compiles curated list of 150+ all-time NBA greats and active benchmark
+      players for GOAT analysis
+    height: 1000
+    id: c50f9b6c-8c53-474d-b56a-7eccf0573621
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: load_historical_players
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: "Adjusts NBA GOAT scores for era bias and supporting cast inflation\
+      \ \u2014 applies +5% era bonus to pre-1980 players and -8% discount to post-2015\
+      \ entrants, computes individual brilliance score based on BPM surplus vs team\
+      \ strength, and applies honors gate capping short careers at rank #30."
+    height: 1000
+    id: dd3f5db7-0a6a-4c5f-b6ec-d40d108500d8
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: goat_bias_corrections
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 20000
+    y: 4200
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Scrapes career stats and per-season metrics for 110+ NBA players
+      from Basketball-Reference with error recovery, tagging active vs. historical
+      status
+    height: 1000
+    id: eee87e05-d66e-408d-b591-a9eed70cc1e7
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: build_full_dataset
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 4000
+    y: 0
+  - auto_size: false
+    canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    compute_settings: null
+    description: Clusters players into 4 archetypes using K-means on career style
+      metrics, fits polynomial age curves per metric per archetype, and computes injury
+      risk tiers to anchor active player performance projections
+    height: 1000
+    id: fa089e16-1c5a-4d31-81be-a1c70baf0896
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    name: age_curve_model
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 14000
+    y: 1400
+  canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+  edges:
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 435839aa-b62e-4726-ab1b-cbde11aa963b
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: be519172-4564-4a88-a222-0cc3358b7343
+    target: dd3f5db7-0a6a-4c5f-b6ec-d40d108500d8
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 4b4848fa-1bb9-4ae7-8184-dca86b7b1582
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 2399c882-babb-489e-a6f6-9cc695d9f20a
+    target: 8cc27baf-399d-40f5-9960-cca37ad94fd0
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 51cd827e-bc71-4b31-a820-1c76552cf761
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 6ffdccca-61e5-4879-bf6b-a8e4588bae6d
+    target: 2073f9ea-25da-48ed-bcb3-3bf5be63747e
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 59202563-81fa-4217-bdc6-26a83e6f77b0
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: a58538de-e120-4e3f-b2d4-71fd53f7e75d
+    target: 2399c882-babb-489e-a6f6-9cc695d9f20a
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 5d9bfda4-cc64-465b-99a4-331854bb6880
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 9abc330f-d594-41ee-8832-894d25528f34
+    target: 59771274-d4a6-4a41-9768-bc836954c280
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 5db14732-67ef-4541-a9c6-b4f502e7569b
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 2399c882-babb-489e-a6f6-9cc695d9f20a
+    target: 5efe195d-1e79-45da-8000-9e86ba097e5a
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 6858b6db-56a1-4734-81a1-6bb942005e13
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 3fd701be-e065-48c6-88c1-b9e0249fd240
+    target: fa089e16-1c5a-4d31-81be-a1c70baf0896
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 6b20a6da-bd22-4da2-ab05-be5343611253
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 8cc27baf-399d-40f5-9960-cca37ad94fd0
+    target: 6ffdccca-61e5-4879-bf6b-a8e4588bae6d
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 6f897ff3-c21a-455f-bf58-1f3f5e76e54a
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: c50f9b6c-8c53-474d-b56a-7eccf0573621
+    target: eee87e05-d66e-408d-b591-a9eed70cc1e7
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 7e2b33c7-5e9a-4bcb-b226-ab5f88739700
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 73cd116f-992e-4e29-9269-798b173f82d7
+    target: bf0c6dab-8859-47b6-a8f5-8c3e343accdb
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 80d636dd-2bbb-440b-a25e-90922d39b24a
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: c50f9b6c-8c53-474d-b56a-7eccf0573621
+    target: 3ff13051-dae0-4cad-a898-818e53f31f3a
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 8c245d1e-9190-4b00-a704-77cc419bc867
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: c50f9b6c-8c53-474d-b56a-7eccf0573621
+    target: 9abc330f-d594-41ee-8832-894d25528f34
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 91808edd-0932-4660-a7b3-bfe744e8b004
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: fa089e16-1c5a-4d31-81be-a1c70baf0896
+    target: a58538de-e120-4e3f-b2d4-71fd53f7e75d
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: 9c9d271a-9df9-4229-82e1-bf9d542b2f0b
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: dd3f5db7-0a6a-4c5f-b6ec-d40d108500d8
+    target: 35473995-ba09-48c7-9360-dd206e34d6ab
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: b9fb4ff4-4784-406e-9713-b748960afacc
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: eee87e05-d66e-408d-b591-a9eed70cc1e7
+    target: 59771274-d4a6-4a41-9768-bc836954c280
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: c5008556-eca6-4820-bf96-bd837ec0cddb
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 3ff13051-dae0-4cad-a898-818e53f31f3a
+    target: eee87e05-d66e-408d-b591-a9eed70cc1e7
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: d3a69b31-de52-4ef7-87ae-6179253bec75
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: 59771274-d4a6-4a41-9768-bc836954c280
+    target: 73cd116f-992e-4e29-9269-798b173f82d7
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: d4a98848-425d-41bf-ad9b-b1d36fe24ec5
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: bf0c6dab-8859-47b6-a8f5-8c3e343accdb
+    target: 3fd701be-e065-48c6-88c1-b9e0249fd240
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: d79c993f-9986-4f56-8082-176a359f01e1
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: be519172-4564-4a88-a222-0cc3358b7343
+    target: a243b73d-82da-4b3a-a6e6-9df360289369
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: e95a389e-d5bc-4382-a262-f15ed1a5e5c1
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: a58538de-e120-4e3f-b2d4-71fd53f7e75d
+    target: 89d7cc28-bc0d-4d4e-8948-3edde31a99b2
+  - canvas_id: f93beda2-65f8-4f28-9d09-2eadd93e2b06
+    id: ed3934d1-10eb-423f-a7be-1016c3dac422
+    layer_id: d84100af-781e-4ef3-9641-d686593d49a2
+    source: a58538de-e120-4e3f-b2d4-71fd53f7e75d
+    target: be519172-4564-4a88-a222-0cc3358b7343
+  id: d84100af-781e-4ef3-9641-d686593d49a2
+  name: NBA All-Time Greatness Predictor
+  type: 1
+assets: []
