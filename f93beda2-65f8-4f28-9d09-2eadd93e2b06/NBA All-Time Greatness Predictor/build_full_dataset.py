@@ -5,7 +5,22 @@ import requests
 from bs4 import BeautifulSoup, Comment
 import time
 import warnings
+import sys
+from pathlib import Path
 warnings.filterwarnings('ignore')
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/122.0.0.0 Safari/537.36"
+    )
+}
 
 # ─────────────────────────────────────────────────────────────────
 # Step 4: Full Scrape Pipeline — 110 players with 404 recovery
@@ -33,7 +48,7 @@ SLUG_MAP_CORRECTED = {
     "Shaquille O'Neal":        "onealsh01",
     "Tim Duncan":              "duncati01",
     "Kobe Bryant":             "bryanko01",
-    "Oscar Robertson":         "robertos01",
+    "Oscar Robertson":         "roberos01",
     "Jerry West":              "westje01",
     "Hakeem Olajuwon":         "olajuha01",
     "Charles Barkley":         "barklch01",
@@ -59,7 +74,7 @@ SLUG_MAP_CORRECTED = {
     "Pete Maravich":           "maravpe01",
     "Rick Barry":              "barryri01",
     "Bob Cousy":               "cousybo01",
-    "Julius Erving":           "ervingju01",
+    "Julius Erving":           "ervinju01",
     "John Havlicek":           "havlijo01",
     "Elvin Hayes":             "hayesel01",
     "Wes Unseld":              "unselwe01",
@@ -87,7 +102,7 @@ SLUG_MAP_CORRECTED = {
     "Anthony Davis":           "davisan02",
     "Nikola Jokic":            "jokicni01",
     "Kawhi Leonard":           "leonaka01",
-    "Paul George":             "georgepa01",
+    "Paul George":             "georgpa01",
     "Kyrie Irving":            "irvinky01",
     "Jimmy Butler":            "butleji01",
     "Bam Adebayo":             "adebaba01",
@@ -100,7 +115,7 @@ SLUG_MAP_CORRECTED = {
     "Paolo Banchero":          "banchpa01",
     "Victor Wembanyama":       "wembavi01",
     "Shai Gilgeous-Alexander": "gilgesh01",
-    "Cade Cunningham":         "cunningca01",
+    "Cade Cunningham":         "cunnica01",
     "Evan Mobley":             "mobleev01",
     "Scottie Barnes":          "barnesc01",
     "Paul Pierce":             "piercpa01",
@@ -108,15 +123,15 @@ SLUG_MAP_CORRECTED = {
     "Vince Carter":            "cartevi01",
     "Tracy McGrady":           "mcgratr01",
     "Grant Hill":              "hillgr01",
-    "Alonzo Mourning":         "mournalo01",
+    "Alonzo Mourning":         "mournal01",
     "Dikembe Mutombo":         "mutomdi01",
-    "Bob McAdoo":              "mcadoba01",
+    "Bob McAdoo":              "mcadobo01",
     "Artis Gilmore":           "gilmoar01",
     "Sidney Moncrief":         "moncrsi01",
     "Jack Sikma":              "sikmaja01",
-    "Dennis Johnson":          "johnsde02",
-    "Maurice Cheeks":          "cheekmo01",
-    "Bobby Jones":             "jonesbo02",
+    "Dennis Johnson":          "johnsde01",
+    "Maurice Cheeks":          "cheekma01",
+    "Bobby Jones":             "jonesbo01",
     "Spencer Haywood":         "haywosp01",
     "Connie Hawkins":          "hawkico01",
     "Calvin Murphy":           "murphca01",
@@ -124,11 +139,11 @@ SLUG_MAP_CORRECTED = {
     "Bailey Howell":           "howelba01",
     "Paul Arizin":             "arizipa01",
     "Dolph Schayes":           "schaydo01",
-    "Penny Hardaway":          "hardape01",
+    "Penny Hardaway":          "hardaan01",
     "Fat Lever":               "leverfa01",
-    "World B. Free":           "freewor01",
+    "World B. Free":           "freewo01",
     "Mark Aguirre":            "aguirma01",
-    "Dan Issel":               "issslda01",
+    "Dan Issel":               "isselda01",
     "Dave DeBusschere":        "debusda01",
     "Jerry Sloan":             "sloanje01",
     "Chet Walker":             "walkech01",
@@ -167,32 +182,61 @@ def safe_fetch(slug: str, player_name: str, delay: float = 3.2) -> dict:
         tbl = soup.find("table", {"id": tid})
         if not tbl:
             return pd.DataFrame()
+
         rows = []
-        for row in tbl.find("tbody").find_all("tr"):
-            if "thead" in row.attrs.get("class", []):
+
+        # Basketball-Reference keeps career totals in <tfoot>.
+        # We parse both tbody and tfoot so _career() can reliably find "Career".
+        for section in [tbl.find("tbody"), tbl.find("tfoot")]:
+            if not section:
                 continue
-            cells = {c.get("data-stat",""): c.text.strip()
-                     for c in row.find_all(["td","th"]) if c.get("data-stat")}
-            if cells:
-                rows.append(cells)
+            for row in section.find_all("tr"):
+                if "thead" in row.attrs.get("class", []):
+                    continue
+                cells = {
+                    c.get("data-stat", ""): c.text.strip()
+                    for c in row.find_all(["td", "th"])
+                    if c.get("data-stat")
+                }
+                if cells:
+                    rows.append(cells)
+
         return pd.DataFrame(rows).reset_index(drop=True)
 
     def _career(df, col="year_id"):
         if df.empty or col not in df.columns:
             return pd.Series(dtype=object)
+
         df = df.reset_index(drop=True)
-        m = df[col].fillna("").str.contains("Career", case=False)
-        if m.any():
-            return df[m].iloc[-1]
-        valid = df[df[col].fillna("") != ""]
+        year = df[col].fillna("").astype(str)
+
+        # Legacy pages may include an explicit "Career" label.
+        m_career = year.str.contains(r"\bCareer\b", case=False, regex=True)
+        if m_career.any():
+            return df[m_career].iloc[0]
+
+        # Basketball-Reference current layout uses aggregate footer rows like "15 Yrs".
+        # Prefer that total-career row over team-split rows like "WAS (2 Yrs)".
+        m_yrs_total = year.str.match(r"^\d+\s+Yrs?$", case=False)
+        if m_yrs_total.any():
+            return df[m_yrs_total].iloc[0]
+
+        valid = df[year != ""]
         return valid.iloc[-1] if not valid.empty else pd.Series(dtype=object)
 
     def _seasons(df, col="year_id"):
         if df.empty or col not in df.columns:
             return df
+
         df = df.reset_index(drop=True)
-        return df[~df[col].fillna("").str.contains(
-            r"Career|Did Not|Totals|^TOT$", case=False, regex=True)].reset_index(drop=True)
+        year = df[col].fillna("").astype(str)
+
+        footer_or_nonseason = year.str.contains(
+            r"Career|Did Not|Totals|^TOT$|\bYrs?\b|Game Avg",
+            case=False,
+            regex=True,
+        )
+        return df[~footer_or_nonseason].reset_index(drop=True)
 
     tot_df = _parse("totals_stats")
     adv_df = _parse("advanced")
@@ -282,3 +326,19 @@ print(f"✓ Scraped: {len(all_career_records)} players")
 print(f"✗ Failed:  {len(failed_players)} players")
 if failed_players:
     print("  Failed:", [(p[0], p[2]) for p in failed_players])
+
+# Save outputs next to this script so runs are location-independent.
+out_dir = Path(__file__).resolve().parent
+career_df = pd.DataFrame(all_career_records)
+seasons_df = pd.concat(all_season_records, ignore_index=True) if all_season_records else pd.DataFrame()
+
+career_path = out_dir / "nba_career_stats.csv"
+seasons_path = out_dir / "nba_seasons_longitudinal.csv"
+
+career_df.to_csv(career_path, index=False)
+if not seasons_df.empty:
+    seasons_df.to_csv(seasons_path, index=False)
+
+print(f"Saved career data: {career_path} ({len(career_df)} rows)")
+print(f"Saved season data: {seasons_path} ({len(seasons_df)} rows)")
+

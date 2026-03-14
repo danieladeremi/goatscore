@@ -1,0 +1,6 @@
+player_name,current_age,goat_score_v4_current,goat_score_v4_projected,delta_v4,delta_capped_v4,injury_mult_v4,age_cap_type_v4
+Victor Wembanyama,21,35.2,41.4,6.23,False,0.683,None
+Shai Gilgeous-Alexander,26,48.9,55.5,6.64,False,0.788,None
+Nikola Jokic,29,62.2,66.4,4.24,False,0.882,None
+LeBron James,40,74.4,72.9,-1.5,True,0.852,freeze_39+
+Stephen Curry,36,55.2,58.7,3.49,True,0.764,3.5
